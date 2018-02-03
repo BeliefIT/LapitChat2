@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="solutionexpert.org.lapitchat2.SettingsActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/sac"
+        app:civ_border_color="#FFFF"
+        app:civ_border_width="2dp" />
+    <TextView
+        android:id="@+id/settings_display_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/settings_image"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:text="Display name"/>
+    <TextView
+        android:id="@+id/settings_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/settings_display_name"
+        android:text="Hi there, i am feeling happy"
+        android:textSize="16sp"/>
+
+    <Button
+        android:id="@+id/settings_image_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_status"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:text="change Image" />
+
+    <Button
+        android:id="@+id/settings_status_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/settings_image_btn"
+        android:layout_below="@+id/settings_image_btn"
+        android:layout_marginTop="13dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="change status" />
+
+</RelativeLayout>
