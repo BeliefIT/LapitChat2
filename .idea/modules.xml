@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LapitChat2.iml" filepath="$PROJECT_DIR$/LapitChat2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/LapitChat1.iml" filepath="$PROJECT_DIR$/.idea/LapitChat1.iml" />
+      <module fileurl="file://E:\AndroidStudioProjects\LapitChat1\LapitChat2.iml" filepath="E:\AndroidStudioProjects\LapitChat1\LapitChat2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\AndroidStudioProjects\LapitChat1\app\app.iml" filepath="E:\AndroidStudioProjects\LapitChat1\app\app.iml" />
     </modules>
   </component>
 </project>
