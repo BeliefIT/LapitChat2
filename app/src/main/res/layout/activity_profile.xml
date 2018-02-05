@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#353535"
     tools:context="solutionexpert.org.lapitchat2.ProfileActivity">
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="270dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/default_avatar" />
