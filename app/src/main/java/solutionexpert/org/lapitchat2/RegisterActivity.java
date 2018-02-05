@@ -1,18 +1,14 @@
 package solutionexpert.org.lapitchat2;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,28 +35,26 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
-        mRegToolbar=findViewById(R.id.register_toolbar);
+        mRegToolbar = findViewById(R.id.register_toolbar);
         setSupportActionBar(mRegToolbar);
         getSupportActionBar().setTitle("Create account");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRegProgress=new ProgressDialog(this);
+        mRegProgress = new ProgressDialog(this);
 
 
-
-        mDisplayName=findViewById(R.id.reg_display_name);
-        mEmail=findViewById(R.id.reg_email);
-        mPassword=findViewById(R.id.reg_password);
-        mCreateBtn=findViewById(R.id.reg_create_button);
+        mDisplayName = findViewById(R.id.reg_display_name);
+        mEmail = findViewById(R.id.reg_email);
+        mPassword = findViewById(R.id.reg_password);
+        mCreateBtn = findViewById(R.id.reg_create_button);
         mCreateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String DisplayName=mDisplayName.getEditText().getText().toString();
-                String Email=mEmail.getEditText().getText().toString();
-                String Password=mPassword.getEditText().getText().toString();
+                String DisplayName = mDisplayName.getEditText().getText().toString();
+                String Email = mEmail.getEditText().getText().toString();
+                String Password = mPassword.getEditText().getText().toString();
 
-                if(!TextUtils.isEmpty(DisplayName)&& !TextUtils.isEmpty(Email) && !TextUtils.isEmpty(Password))
-                {
+                if (!TextUtils.isEmpty(DisplayName) && !TextUtils.isEmpty(Email) && !TextUtils.isEmpty(Password)) {
                     mRegProgress.setTitle("Registering User");
                     mRegProgress.setMessage("Please wait while we create your account");
                     mRegProgress.setCanceledOnTouchOutside(false);
@@ -85,12 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             mRegProgress.dismiss();
 
-                            FirebaseUser currentUser=FirebaseAuth.getInstance().getCurrentUser();
-                            String uid=currentUser.getUid();
+                            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = currentUser.getUid();
 
-                            databaseReference= FirebaseDatabase.getInstance().getReference().child("user").child(uid);
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(uid);
 
-                            HashMap<String, String> userMap=new HashMap<>();
+                            HashMap<String, String> userMap = new HashMap<>();
                             userMap.put("name", displayName);
                             userMap.put("status", "hi i am happy");
                             userMap.put("image", "default");

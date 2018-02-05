@@ -14,33 +14,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
-        android:src="@drawable/sac"
+        android:src="@drawable/default_avatar"
         app:civ_border_color="#FFFF"
         app:civ_border_width="2dp" />
+
     <TextView
         android:id="@+id/settings_display_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/settings_image"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        android:textSize="24sp"
+        android:gravity="center"
+        android:text="Display name"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
-        android:text="Display name"/>
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
     <TextView
         android:id="@+id/settings_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_below="@+id/settings_display_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/settings_display_name"
+        android:gravity="center"
         android:text="Hi there, i am feeling happy"
-        android:textSize="16sp"/>
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/settings_image_btn"
