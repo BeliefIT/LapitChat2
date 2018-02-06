@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView mProfileImage;
@@ -29,11 +32,13 @@ public class ProfileActivity extends AppCompatActivity {
     Button mProfileSendReqBtn;
 
     private DatabaseReference mUserDatabase;
+    private DatabaseReference mFriendRegDatabase;
+    private DatabaseReference mFriendDatabase;
 
     private ProgressDialog progressDialog;
 
     private String mCurrent_state;
-    private DatabaseReference mFriendRegDatabase;
+
     private FirebaseUser mCurrent_user;
 
     @Override
@@ -45,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("user").child(profile_userID);
         mFriendRegDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
+        mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
         mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();
 
         mProfileImage = findViewById(R.id.profile_image);
@@ -89,15 +95,34 @@ public class ProfileActivity extends AppCompatActivity {
                                 mProfileSendReqBtn.setText("Cancel Friend Request");
 
                             }
+                            progressDialog.dismiss();
+                        } else {
+                            mFriendDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    if (dataSnapshot.hasChild(profile_userID)) {
+                                        mCurrent_state = "friends";
+                                        mProfileSendReqBtn.setText("Unfriend this person");
+
+                                    }
+                                    progressDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    progressDialog.dismiss();
+                                }
+                            });
                         }
 
-                        progressDialog.dismiss();
+
 
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-
+                        progressDialog.dismiss();
                     }
                 });
 
@@ -105,7 +130,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                progressDialog.dismiss();
             }
         });
 
@@ -168,6 +193,45 @@ public class ProfileActivity extends AppCompatActivity {
                                     }
                                 });
                         break;
+
+                    case "req_received":
+                        //................req received state...........................
+                        final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
+                        mFriendDatabase.child(mCurrent_user.getUid()).child(profile_userID).setValue(currentDate)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        mFriendDatabase.child(profile_userID).child(mCurrent_user.getUid()).setValue(currentDate)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        mFriendRegDatabase.child(mCurrent_user.getUid()).child(profile_userID).removeValue()
+                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+
+                                                                        mFriendRegDatabase.child(profile_userID).child(mCurrent_user.getUid()).removeValue()
+                                                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(Void aVoid) {
+                                                                                        mProfileSendReqBtn.setEnabled(true);
+                                                                                        mCurrent_state = "friends";
+                                                                                        mProfileSendReqBtn.setText("Unfriend this person");
+
+                                                                                        Toast.makeText(ProfileActivity.this, "canceling friend request", Toast.LENGTH_SHORT).show();
+
+                                                                                    }
+                                                                                });
+
+                                                                    }
+                                                                });
+                                                    }
+                                                });
+                                    }
+                                });
+
+
+
                     default:
                         Toast.makeText(ProfileActivity.this, "default", Toast.LENGTH_SHORT).show();
 

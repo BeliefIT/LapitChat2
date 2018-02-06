@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         android:src="@drawable/default_avatar" />
