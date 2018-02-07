@@ -51,9 +51,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         final String profile_userID = getIntent().getStringExtra("user_id");
+        // final String profile_userID="SgaCs7HdsRbpRMTg6vLj6wZkRmA3";
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("user").child(profile_userID);
         mUserDatabase.keepSynced(true);
+
+
         mFriendRegDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
         mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
         mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child("Notifications");

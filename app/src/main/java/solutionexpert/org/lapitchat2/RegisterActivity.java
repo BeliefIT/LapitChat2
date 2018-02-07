@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -82,13 +84,17 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             String uid = currentUser.getUid();
 
+
+                            String deviceToken = FirebaseInstanceId.getInstance().getToken();
                             databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(uid);
 
                             HashMap<String, String> userMap = new HashMap<>();
+                            userMap.put("device_token", deviceToken);
                             userMap.put("name", displayName);
                             userMap.put("status", "hi i am happy");
                             userMap.put("image", "default");
                             userMap.put("thumb_image", "default");
+
                             databaseReference.setValue(userMap);
 
 
